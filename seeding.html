@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Venue to Ecosystem — How Somethingyou Completes the Architecture</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 18mm;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Calibri, 'Segoe UI', Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.55;
+    color: #222;
+    background: #fff;
+    padding: 40px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ── Title block ── */
+  .title-block {
+    text-align: center;
+    padding: 60px 0 50px;
+    border-bottom: 3px solid #2b579a;
+    margin-bottom: 50px;
+  }
+  .title-block h1 {
+    font-size: 22pt;
+    font-weight: 700;
+    color: #2b579a;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+  }
+  .title-block .subtitle {
+    font-size: 12pt;
+    color: #555;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* ── Stage sections ── */
+  .stage {
+    margin-bottom: 60px;
+    page-break-inside: avoid;
+  }
+  .stage-number {
+    font-size: 9pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    margin-bottom: 4px;
+  }
+  .stage h2 {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .stage .body-text {
+    font-size: 11pt;
+    color: #444;
+    margin-bottom: 18px;
+    max-width: 780px;
+  }
+  .caption {
+    font-size: 9.5pt;
+    color: #888;
+    font-style: italic;
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  /* ── Diagram container ── */
+  .diagram {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 30px 24px 20px;
+    margin-top: 14px;
+  }
+
+  /* ── Shared box styles ── */
+  .box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 16px;
+    border-radius: 3px;
+    font-size: 9.5pt;
+    font-weight: 600;
+    line-height: 1.3;
+    min-width: 100px;
+    position: relative;
+  }
+  .box-grey {
+    background: #f5f5f5;
+    border: 2px solid #999;
+    color: #555;
+  }
+  .box-blue {
+    background: #e8eef7;
+    border: 2px solid #2b579a;
+    color: #2b579a;
+  }
+  .box-green {
+    background: #e8f5e9;
+    border: 2px solid #2e7d32;
+    color: #2e7d32;
+  }
+  .box-orange {
+    background: #fff3e0;
+    border: 2px dashed #e65100;
+    color: #e65100;
+  }
+  .box-blue-large {
+    background: #dce4f0;
+    border: 3px solid #2b579a;
+    color: #2b579a;
+    font-size: 11pt;
+    font-weight: 700;
+    padding: 14px 24px;
+  }
+  .box-green-large {
+    background: #d7ecd9;
+    border: 3px solid #2e7d32;
+    color: #2e7d32;
+    font-size: 11pt;
+    font-weight: 700;
+    padding: 14px 24px;
+  }
+
+  /* ── Layout helpers ── */
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .row:last-child { margin-bottom: 0; }
+  .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* ── Arrow styles ── */
+  .arrow-down {
+    text-align: center;
+    font-size: 18px;
+    color: #aaa;
+    line-height: 1;
+    margin: 4px 0;
+  }
+  .arrow-down.blue { color: #2b579a; }
+  .arrow-down.green { color: #2e7d32; }
+  .arrow-right {
+    font-size: 16px;
+    color: #aaa;
+  }
+  .arrow-right.blue { color: #2b579a; }
+  .arrow-right.solid { color: #2b579a; font-weight: bold; }
+  .dotted-line {
+    border-top: 2px dotted #bbb;
+    width: 40px;
+    margin: 0 -4px;
+    align-self: center;
+  }
+  .solid-line {
+    border-top: 2px solid #2b579a;
+    width: 40px;
+    margin: 0 -4px;
+    align-self: center;
+  }
+  .solid-line.green {
+    border-top-color: #2e7d32;
+  }
+
+  /* ── Stage-specific layouts ── */
+
+  /* Stage 1 */
+  .s1-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .s1-grid .box { min-width: unset; width: 100%; }
+  .s1-connections {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-top: 10px;
+  }
+  .s1-dotted-bar {
+    border-top: 2px dotted #bbb;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  /* Stage 2a paths */
+  .path-group {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .path {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .path-label {
+    font-size: 8.5pt;
+    color: #999;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  /* Stage 2b views */
+  .views-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .view-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .view-items {
+    font-size: 8.5pt;
+    color: #777;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .no-link {
+    color: #ccc;
+    font-size: 20px;
+    margin: 0 -2px;
+  }
+
+  /* Stage 5 zones */
+  .zones {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  .zone {
+    flex: 1;
+    min-width: 240px;
+    max-width: 340px;
+    padding: 18px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .zone-solved {
+    border: 2px solid #2e7d32;
+    background: #f1f8f1;
+  }
+  .zone-unsolved {
+    border: 2px dashed #e65100;
+    background: #fff8f0;
+  }
+  .zone-label {
+    font-size: 9pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .zone-solved .zone-label { color: #2e7d32; }
+  .zone-unsolved .zone-label { color: #e65100; }
+  .zone-items {
+    font-size: 9.5pt;
+    color: #555;
+    line-height: 1.6;
+  }
+  .zone-question {
+    font-size: 28pt;
+    color: #e65100;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+
+  /* Stage 6 mesh */
+  .mesh-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .mesh-ring {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .mesh-box {
+    position: relative;
+    padding: 12px 14px 10px;
+    min-width: 110px;
+    text-align: center;
+  }
+  .adk-badge {
+    display: inline-block;
+    background: #2b579a;
+    color: #fff;
+    font-size: 7.5pt;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+  .mesh-hub {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8eef7, #dce4f0);
+    border: 2px solid #2b579a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9pt;
+    font-weight: 700;
+    color: #2b579a;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .mesh-lines {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  .mesh-line-segment {
+    width: 2px;
+    height: 20px;
+    background: #2b579a;
+  }
+
+  /* Stage 7 new participants */
+  .s7-new-box {
+    border-style: dashed !important;
+  }
+  .s7-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .s7-label-tag {
+    font-size: 8pt;
+    background: #fff3e0;
+    color: #e65100;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid #ffcc80;
+  }
+
+  /* Stage 8 wall */
+  .wall-layout {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .wall-left {
+    flex: 1;
+    max-width: 300px;
+    padding: 18px;
+    text-align: center;
+  }
+  .wall-barrier {
+    width: 6px;
+    background: repeating-linear-gradient(
+      0deg,
+      #e65100 0px,
+      #e65100 8px,
+      #fff 8px,
+      #fff 12px
+    );
+    margin: 0 16px;
+    border-radius: 2px;
+  }
+  .wall-right {
+    flex: 1;
+    max-width: 300px;
+    padding: 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .wall-q {
+    font-size: 9pt;
+    color: #e65100;
+    font-weight: 600;
+  }
+
+  /* Stage 9 full arch */
+  .arch-layer {
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .arch-layer:last-child { margin-bottom: 0; }
+  .arch-oktria {
+    background: #e8f5e9;
+    border: 2px solid #2e7d32;
+  }
+  .arch-sy {
+    background: #e8eef7;
+    border: 2px solid #2b579a;
+  }
+  .arch-participants {
+    background: #f5f5f5;
+    border: 2px solid #999;
+  }
+  .arch-label {
+    font-size: 10pt;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .arch-oktria .arch-label { color: #2e7d32; }
+  .arch-sy .arch-label { color: #2b579a; }
+  .arch-participants .arch-label { color: #666; }
+  .arch-items {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .arch-item {
+    font-size: 8.5pt;
+    padding: 5px 12px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .arch-oktria .arch-item {
+    background: #c8e6c9;
+    color: #1b5e20;
+  }
+  .arch-sy .arch-item {
+    background: #c5cfe0;
+    color: #1a3a6b;
+  }
+  .arch-participants .arch-item {
+    background: #e8e8e8;
+    color: #444;
+  }
+  .arch-connector {
+    text-align: center;
+    font-size: 14px;
+    color: #2b579a;
+    margin: 4px 0;
+    letter-spacing: 8px;
+  }
+
+  /* Workflow arrows */
+  .workflow-tag {
+    display: inline-block;
+    font-size: 7.5pt;
+    color: #2b579a;
+    border: 1px dashed #2b579a;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin: 2px 3px;
+    font-weight: 500;
+  }
+
+  /* Divider between stages */
+  .stage-divider {
+    border: none;
+    border-top: 1px solid #e8e8e8;
+    margin: 50px 0;
+  }
+
+  /* Print */
+  @media print {
+    body { padding: 0; max-width: 100%; font-size: 10pt; }
+    .stage { page-break-inside: avoid; }
+    .diagram { background: #fafafa !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════ TITLE ════════════════════════════════════════════ -->
+<div class="title-block">
+  <h1>From Venue to Ecosystem</h1>
+  <div style="font-size:13pt; color:#2b579a; font-weight:600; margin-bottom:6px;">How Somethingyou Completes the Architecture</div>
+  <div class="subtitle">A staged walkthrough for Steve and Brad</div>
+</div>
+
+
+<!-- ════════════════════════════════ STAGE 1 ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 1</div>
+  <h2>The starting point is always the same.</h2>
+  <div class="body-text">
+    Every venue runs some combination of these systems. A PIN Pad takes payments. A POS manages sales. An ERP runs the business. Internal systems handle stock, rosters, reporting. External systems &mdash; loyalty, delivery platforms, accounting &mdash; sit outside, loosely connected or not connected at all.
+  </div>
+  <div class="diagram">
+    <div class="s1-grid">
+      <div class="box box-grey">PIN Pad</div>
+      <div class="box box-grey">POS</div>
+      <div class="box box-grey">ERP</div>
+      <div class="box box-grey" style="font-size:8.5pt;">Internal Systems<br><span style="font-weight:400;font-size:8pt;color:#888;">stock, rosters, reporting</span></div>
+      <div class="box box-grey" style="font-size:8.5pt;">External Systems<br><span style="font-weight:400;font-size:8pt;color:#888;">loyalty, delivery, accounting</span></div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="s1-dotted-bar"></div>
+    </div>
+    <div class="caption">Dotted lines = these systems should talk to each other. They almost never do.</div>
+  </div>
+</div>
+
+<hr class="stage-divider">
+
+<!-- ════════════════════════════════ STAGE 2a ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 2a</div>
+  <h2>Below the surface, payment orchestration already exists.</h2>
+  <div class="body-text">
+    Multiple parties orchestrating a solution &mdash; HioPOS connects the POS to the payment flow. URPAY settles to the bank account. DMG routes transactions through Fiserv.
+  </div>
+  <div class="diagram">
+    <div class="path-group">
+      <!-- Path 1 -->
+      <div class="path">
+        <div class="path-label">Path 1 &mdash; Acquiring</div>
+        <div class="box box-grey">HioPOS</div>
+        <div class="arrow-down">&darr;</div>
+        <div class="box box-grey">DMG</div>
+        <div class="arrow-down">&darr;</div>
+        <div class="box box-grey">Fiserv</div>
+        <div class="arrow-down">&darr;</div>
+        <div class="box box-grey" style="border-color:#444;font-weight:700;">Bank Account</div>
+      </div>
+      <!-- Gap indicator -->
+      <div style="display:flex;align-items:center;padding-top:60px;">
+        <div style="color:#ccc;font-size:28px;font-weight:300;">|</div>
+        <div style="color:#e65100;font-size:8pt;font-weight:600;writing-mode:vertical-rl;text-orientation:mixed;margin-left:4px;">NO LINK</div>
+        <div style="color:#ccc;font-size:28px;font-weight:300;">|</div>
+      </div>
+      <!-- Path 2 -->
+      <div class="path">
+        <div class="path-label">Path 2 &mdash; Settlement</div>
+        <div class="box box-grey">URPAY</div>
+        <div class="arrow-down">&darr;</div>
+        <div class="arrow-down">&darr;</div>
+        <div class="arrow-down">&darr;</div>
+        <div class="box box-grey" style="border-color:#444;font-weight:700;">Bank Account</div>
+      </div>
+    </div>
+    <div class="caption">Two separate settlement paths to the same bank account. Neither knows what the other is doing.</div>
+  </div>
+</div>
+
+<hr class="stage-divider">
+
+<!-- ════════════════════════════════ STAGE 2b ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 2b</div>
+  <h2>Same bank account. Different views. No shared context.</h2>
+  <div class="body-text">
+    DMG sees transaction routing and scheme fees. URPAY sees merchant settlement and balances. HioPOS sees POS sales and terminal status. Each operates independently &mdash; no reconciliation between them.
+  </div>
+  <div class="diagram">
+    <div class="views-row">
+      <div class="view-col">
+        <div class="box box-grey">DMG View</div>
+        <div class="view-items">Transaction routing<br>Scheme fees</div>
+        <div class="arrow-down">&darr;</div>
+      </div>
+      <div class="no-link">&times;</div>
+      <div class="view-col">
+        <div class="box box-grey">URPAY View</div>
+        <div class="view-items">Merchant settlement<br>Balances</div>
+        <div class="arrow-down">&darr;</div>
+      </div>
+      <div class="no-link">&times;</div>
+      <div class="view-col">
+        <div class="box box-grey">HioPOS View</div>
+        <div class="view-items">POS sales<br>Terminal status</div>
+        <div class="arrow-down">&darr;</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:8px;">
+      <div class="box box-grey" style="border-color:#444;font-weight:700;min-width:200px;">Bank Account</div>
+    </div>
+    <div class="caption">Three systems, one bank account, zero reconciliation.</div>
+  </div>
+</div>
+
+<hr class="stage-divider">
+
+<!-- ════════════════════════════════ STAGE 3 ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 3</div>
+  <h2>Somethingyou creates a single reconciliation layer.</h2>
+  <div class="body-text">
+    SY connects to URPAY, DMG, and Fiserv &mdash; creating a single reconciliation layer across all three. For the first time, the bank account can be reconciled against every transaction source. Visibility, tokenisation, and automated reconciliation become possible.
+  </div>
+  <div class="diagram">
+    <div style="text-align:center;">
+      <div class="row">
+        <div class="box box-grey">DMG</div>
+        <div class="solid-line"></div>
+        <div class="box box-blue-large">SY</div>
+        <div class="solid-line"></div>
+        <div class="box box-grey">URPAY</div>
+      </div>
+      <div class="row" style="margin-top:2px;">
+        <div class="box box-grey">Fiserv</div>
+        <div class="solid-line"></div>
+        <div style="min-width:80px;text-align:center;">
+          <div class="arrow-down blue">&darr;</div>
+          <div style="font-size:7.5pt;color:#2b579a;font-weight:600;">Dynamic Fees<br>&amp; Charges</div>
+        </div>
+        <div class="solid-line"></div>
+        <div class="box box-grey" style="border-color:#444;font-weight:700;">Bank Account</div>
+      </div>
+    </div>
+    <div class="caption">One connection layer. Three systems that can finally see each other.</div>
+  </div>
+</div>
+
+<hr class="stage-divider">
+
+<!-- ════════════════════════════════ STAGE 4 ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 4</div>
+  <h2>Now the systems can talk &mdash; not just transact.</h2>
+  <div class="body-text">
+    Workflow orchestration adds communication and flow between ecosystem participants. Provisioning, pricing updates, and operational messages can move between parties. The ecosystem starts to behave like a network, not a collection of point-to-point integrations.
+  </div>
+  <div class="diagram">
+    <div style="text-align:center;">
+      <div class="row">
+        <div class="box box-grey">DMG</div>
+        <div class="solid-line"></div>
+        <div class="box box-blue-large">SY</div>
+        <div class="solid-line"></div>
+        <div class="box box-grey">URPAY</div>
+      </div>
+      <div class="row" style="margin-top:2px;">
+        <div class="box box-grey">Fiserv</div>
+        <div class="solid-line"></div>
+        <div style="min-width:80px;text-align:center;">
+          <div class="arrow-down blue">&darr;</div>
+        </div>
+        <div class="solid-line"></div>
+        <div class="box box-grey" style="border-color:#444;font-weight:700;">Bank Account</div>
+      </div>
+      <div style="margin-top:16px;">
+        <div class="s7-labels">
+          <span class="workflow-tag">Provisioning</span>
+          <span class="workflow-tag">Pricing updates</span>
+          <span class="workflow-tag">Operational messages</span>
+          <span class="workflow-tag">Status notifications</span>
+        </div>
+      </div>
+    </div>
+    <div class="caption">Transactions move money. Workflows move everything else.</div>
+  </div>
+</div>
+
+<hr class="stage-divider">
+
+<!-- ════════════════════════════════ STAGE 5 ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 5</div>
+  <h2>Payment orchestration is solved. Ecosystem orchestration is not.</h2>
+  <div class="body-text">
+    Connecting payment systems is necessary but not sufficient. There is no link for provisioning, pricing, or onboarding of new participants. Merchant management, reseller onboarding, and partner lifecycle sit in disconnected silos. The existing architecture works &mdash; but only for what&rsquo;s already connected. Adding anything new means rebuilding.
+  </div>
+  <div class="diagram">
+    <div class="zones">
+      <div class="zone zone-solved">
+        <div class="zone-label">Solved</div>
+        <div class="zone-items">
+          SY &harr; DMG &harr; Fiserv<br>
+          SY &harr; URPAY<br>
+          Reconciliation<br>
+          Dynamic fees<br>
+          Workflow orchestration
+        </div>
+      </div>
+      <div class="zone zone-unsolved">
+        <div class="zone-label">Not yet</div>
+        <div class="zone-items">
+          New participants?<br>
+          New acquirers?<br>
+          Third-party systems?<br>
+          Dynamic onboarding?
+        </div>
+        <div class="zone-question">?</div>
+      </div>
+    </div>
+    <div class="caption">The green box works. The space outside it doesn&rsquo;t &mdash; not yet.</div>
+  </div>
+</div>
+
+<hr class="stage-divider">
+
+<!-- ════════════════════════════════ STAGE 6 ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 6</div>
+  <h2>A single-purpose agent inside every system.</h2>
+  <div class="body-text">
+    The ADK (Agent Development Kit) sits inside each participant&rsquo;s own environment &mdash; merchant systems, payment orchestration, ecosystem orchestration. It doesn&rsquo;t replace their tools. It participates in them. Any system can now ingress or egress data, workflows, and events to any other.
+  </div>
+  <div class="diagram">
+    <div class="mesh-center">
+      <div class="mesh-ring">
+        <div class="mesh-box box box-grey">Merchant POS<br><span class="adk-badge">ADK</span></div>
+        <div class="mesh-box box box-grey">DMG<br><span class="adk-badge">ADK</span></div>
+        <div class="mesh-box box box-grey">URPAY<br><span class="adk-badge">ADK</span></div>
+      </div>
+      <div class="mesh-lines">
+        <div class="mesh-line-segment"></div>
+        <div class="mesh-line-segment"></div>
+        <div class="mesh-line-segment"></div>
+      </div>
+      <div class="mesh-hub">SY<br>Network</div>
+      <div class="mesh-lines">
+        <div class="mesh-line-segment"></div>
+        <div class="mesh-line-segment"></div>
+        <div class="mesh-line-segment"></div>
+      </div>
+      <div class="mesh-ring">
+        <div class="mesh-box box box-grey">Fiserv<br><span class="adk-badge">ADK</span></div>
+        <div class="mesh-box box box-grey">ERP<br><span class="adk-badge">ADK</span></div>
+        <div class="mesh-box box box-grey">External<br><span class="adk-badge">ADK</span></div>
+      </div>
+    </div>
+    <div class="caption">The integration problem inverts. Instead of building to each system, each system builds once &mdash; to the network.</div>
+  </div>
+</div>
+
+<hr class="stage-divider">
+
+<!-- ════════════════════════════════ STAGE 7 ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 7</div>
+  <h2>New participants need onboarding, standards, and orchestration.</h2>
+  <div class="body-text">
+    Every new participant needs to be onboarded and their standards managed. This requires self-configured mapping and workflows, dynamic pricing, dynamic fees, orchestration, and the communication flows from Stage 4 &mdash; but for participants that don&rsquo;t exist yet.
+  </div>
+  <div class="diagram">
+    <div class="mesh-center">
+      <div class="mesh-ring">
+        <div class="mesh-box box box-grey">Existing<br>Participant<br><span class="adk-badge">ADK</span></div>
+        <div class="mesh-box box box-grey">Existing<br>Participant<br><span class="adk-badge">ADK</span></div>
+      </div>
+      <div class="mesh-lines">
+        <div class="mesh-line-segment"></div>
+        <div class="mesh-line-segment"></div>
+      </div>
+      <div class="mesh-hub">SY<br>Mesh</div>
+      <div class="mesh-lines">
+        <div class="mesh-line-segment" style="background:#e65100;"></div>
+        <div class="mesh-line-segment" style="background:#e65100;"></div>
+        <div class="mesh-line-segment" style="background:#e65100;"></div>
+      </div>
+      <div class="mesh-ring">
+        <div class="mesh-box box box-orange s7-new-box">New<br>Participant<br><span class="adk-badge" style="background:#e65100;">ADK</span></div>
+        <div class="mesh-box box box-orange s7-new-box">New<br>Participant<br><span class="adk-badge" style="background:#e65100;">ADK</span></div>
+        <div class="mesh-box box box-orange s7-new-box">New<br>Participant<br><span class="adk-badge" style="background:#e65100;">ADK</span></div>
+      </div>
+      <div class="s7-labels">
+        <span class="s7-label-tag">Self-configured mapping</span>
+        <span class="s7-label-tag">Dynamic pricing</span>
+        <span class="s7-label-tag">Dynamic fees</span>
+        <span class="s7-label-tag">Workflow orchestration</span>
+      </div>
+    </div>
+    <div class="caption">The architecture that works for existing participants has to work for ones that haven&rsquo;t arrived yet.</div>
+  </div>
+</div>
+
+<hr class="stage-divider">
+
+<!-- ════════════════════════════════ STAGE 8 ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 8</div>
+  <h2>Oktria can go far on its own. Then it hits the wall.</h2>
+  <div class="body-text">
+    Oktria owns URPAY. Whitelabels HioPOS. Has a commercial relationship with DMG. This covers the payment orchestration layer well &mdash; until a merchant doesn&rsquo;t want the POS, or a new acquirer replaces Fiserv, or a third-party system needs onboarding. The architecture has no engine to adapt.
+  </div>
+  <div class="diagram">
+    <div class="wall-layout">
+      <div class="wall-left">
+        <div class="box box-green-large" style="width:100%;margin-bottom:14px;">OKTRIA</div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+          <div class="box box-green" style="width:90%;">URPAY <span style="font-weight:400;font-size:8pt;">(owned)</span></div>
+          <div class="box box-green" style="width:90%;">HioPOS <span style="font-weight:400;font-size:8pt;">(whitelabel)</span></div>
+          <div class="box box-green" style="width:90%;">DMG <span style="font-weight:400;font-size:8pt;">(commercial)</span></div>
+        </div>
+      </div>
+      <div class="wall-barrier"></div>
+      <div class="wall-right">
+        <div class="wall-q">New POS?</div>
+        <div class="wall-q">New acquirer?</div>
+        <div class="wall-q">Third-party onboarding?</div>
+        <div class="wall-q">Dynamic pricing?</div>
+        <div style="font-size:32pt;color:#e65100;font-weight:700;margin-top:4px;">?</div>
+      </div>
+    </div>
+    <div class="caption">Solid foundation. No way to extend it without rebuilding.</div>
+  </div>
+</div>
+
+<hr class="stage-divider">
+
+<!-- ════════════════════════════════ STAGE 9 ════════════════════════════════ -->
+<div class="stage">
+  <div class="stage-number">Stage 9</div>
+  <h2>The full architecture. Nothing rebuilt &mdash; everything connected.</h2>
+  <div class="body-text">
+    BridgeAI provides the ingress layer. The Quantum Engine &mdash; Onboard Mapper, Pricing &amp; Fees, Ledger &mdash; renders the ecosystem pattern dynamically. 25 proprietary models orchestrate pricing, settlement, reconciliation, and participant lifecycle. Oktria&rsquo;s existing infrastructure becomes the deployment surface, not the constraint. The Local AI Engine maps to Oktria&rsquo;s own operational weights &mdash; their knowledge compounds, not just their transactions.
+  </div>
+  <div class="diagram">
+    <!-- Oktria layer -->
+    <div class="arch-layer arch-oktria">
+      <div class="arch-label">OKTRIA &mdash; Deployment Surface</div>
+      <div class="arch-items">
+        <span class="arch-item">URPAY</span>
+        <span class="arch-item">HioPOS</span>
+        <span class="arch-item">DMG Relationship</span>
+        <span class="arch-item">Local AI Model</span>
+      </div>
+    </div>
+    <div class="arch-connector">&darr; &darr; &darr;</div>
+    <!-- SY layer -->
+    <div class="arch-layer arch-sy">
+      <div class="arch-label">SOMETHINGYOU &mdash; Orchestration Layer</div>
+      <div class="arch-items">
+        <span class="arch-item">BridgeAI</span>
+        <span class="arch-item">Quantum Ledger</span>
+        <span class="arch-item">Quantum Pricing</span>
+        <span class="arch-item">Onboard Mapper</span>
+        <span class="arch-item">25 Models</span>
+      </div>
+    </div>
+    <div class="arch-connector">&darr; &darr; &darr;</div>
+    <!-- Participant layer -->
+    <div class="arch-layer arch-participants">
+      <div class="arch-label">ECOSYSTEM PARTICIPANTS</div>
+      <div class="arch-items">
+        <span class="arch-item">Fiserv <span style="font-weight:400;font-size:7.5pt;">ADK</span></span>
+        <span class="arch-item">Merchants <span style="font-weight:400;font-size:7.5pt;">ADK</span></span>
+        <span class="arch-item">New Acquirers <span style="font-weight:400;font-size:7.5pt;">ADK</span></span>
+        <span class="arch-item">Third Parties <span style="font-weight:400;font-size:7.5pt;">ADK</span></span>
+        <span class="arch-item">Future Participants <span style="font-weight:400;font-size:7.5pt;">ADK</span></span>
+      </div>
+    </div>
+    <div class="caption">Oktria&rsquo;s business. Somethingyou&rsquo;s architecture. One ecosystem.</div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:40px 0 20px;color:#bbb;font-size:9pt;">
+  &mdash; End of document &mdash;
+</div>
+
+</body>
+</html>
