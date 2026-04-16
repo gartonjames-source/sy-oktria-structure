@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SY — Structure, Layers, and Relationship with OKTRIA</title>
+<style>
+  @page {
+    size: A4;
+    margin: 2.54cm;
+  }
+  body {
+    font-family: Calibri, 'Segoe UI', Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #1a1a1a;
+    max-width: 21cm;
+    margin: 0 auto;
+    padding: 2.54cm;
+    background: #fff;
+  }
+  h1 {
+    font-size: 16pt;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4pt;
+    border-bottom: 2px solid #2b579a;
+    padding-bottom: 6pt;
+  }
+  h2 {
+    font-size: 13pt;
+    font-weight: 600;
+    color: #2b579a;
+    margin-top: 18pt;
+    margin-bottom: 6pt;
+  }
+  h3 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-top: 12pt;
+    margin-bottom: 4pt;
+  }
+  p {
+    margin: 6pt 0;
+  }
+  .meta {
+    font-size: 10pt;
+    color: #666;
+    margin-bottom: 18pt;
+  }
+  .meta strong {
+    color: #1a1a1a;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10pt 0;
+    font-size: 10.5pt;
+  }
+  th {
+    background-color: #2b579a;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 6pt 10pt;
+  }
+  td {
+    padding: 6pt 10pt;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td {
+    background-color: #f5f7fa;
+  }
+  .callout {
+    background: #f0f4fa;
+    border-left: 4px solid #2b579a;
+    padding: 10pt 14pt;
+    margin: 12pt 0;
+    font-size: 10.5pt;
+  }
+  .callout strong {
+    color: #2b579a;
+  }
+  ul {
+    margin: 4pt 0 4pt 20pt;
+    padding: 0;
+  }
+  li {
+    margin: 3pt 0;
+  }
+  .section-divider {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20pt 0;
+  }
+  a {
+    color: #2b579a;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  .link-block {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10pt 14pt;
+    margin: 10pt 0;
+  }
+  .link-block p {
+    margin: 4pt 0;
+  }
+  .link-label {
+    font-weight: 600;
+    color: #2b579a;
+    display: inline-block;
+    min-width: 200px;
+  }
+  @media print {
+    body { padding: 0; }
+    .link-block a { color: #2b579a; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Somethingyou (SY) — Structure, Layers, and Relationship with OKTRIA</h1>
+
+
+<p>This document covers the structure, layers, commercial relationship, and what sits where between SY and OKTRIA — landing the plane across each dimension.</p>
+
+<hr class="section-divider">
+
+<h2>1. Simplified — What SY Is and What It Does for OKTRIA</h2>
+
+<div class="callout">
+  <strong>The purpose of SY is not to invent products. It is to let others — in this case OKTRIA — See it. Structure it. Move it. Scale it.</strong>
+  <p style="margin-top: 8pt;">SY does this by providing:</p>
+  <ul style="margin: 4pt 0 0 16pt;">
+    <li><strong>Ecosystem orchestration</strong> in the areas known to be the issue — multi-party workflows, settlement, reconciliation, participant lifecycle, alerting. Plus the logic on primes, contracting and legals, and the ontology on who pays whom from what bucket and how every participant sees it from their perspective</li>
+    <li><strong>Local models for each operator</strong> — with ingress and egress, self-configuration, and the ability to improve models over time so the product becomes more effective with every transaction</li>
+    <li><strong>Ledgering</strong> — the financial truth layer that makes commercial terms executable and auditable across all participants</li>
+  </ul>
+  <p style="margin-top: 8pt;">SY deploys where it sees the value proposition as high — so that it can receive a percentage of the value created. SY only earns when OKTRIA earns. COGS line, 5–10% of revenue, aligned by design.</p>
+  <p style="margin-top: 8pt;"><strong>Important:</strong> SY is not in the payment flow. It does not process transactions and it does not store data. SY is ecosystem management, integration, workflow orchestration, and the ETL data pipeline that feeds the model it gives operators to drive their product. Money moves through the existing payment infrastructure (DMG, Fiserv, acquirers). SY sits alongside — orchestrating, not transacting.</p>
+  <p style="margin-top: 8pt;"><strong>OKTRIA owns the product, the customer, the brand, and every commercial decision. SY is the engine underneath — invisible to the operator, visible on the P&amp;L as infrastructure cost.</strong></p>
+  <p style="margin-top: 8pt;">Clients never see SY. It is always behind the ecosystem participant — in this case, OKTRIA. The operator sees OKTRIA. The venue staff see OKTRIA. SY is invisible.</p>
+  <p style="margin-top: 8pt;">And to be clear: if OKTRIA wants to build any of these components itself, it is welcome to do so — and SY would not be needed for those parts. What we find is that in OKTRIA's case, focusing on the product value is best. Leave the plumbing to SY. Leave the processing to the payment value chain (DMG, Fiserv, acquirers). OKTRIA's energy goes where OKTRIA's value is — the product, the operator relationship, and the commercial proposition.</p>
+</div>
+
+<hr class="section-divider">
+
+<h2>2. Reference Materials</h2>
+
+<p>Each document below was written before the Ricardo call. The call validated the architecture rather than informing it — which is the strongest evidence that the thesis holds.</p>
+
+<div class="link-block">
+  <p><span class="link-label">1. Oktria Founding Brief</span> <a href="https://gartonjames-source.github.io/oktria-founding-brief/">gartonjames-source.github.io/oktria-founding-brief/</a></p>
+  <p><span class="link-label">2. SY Explainer</span> <a href="https://gartonjames-source.github.io/somethingyou-explainer/">gartonjames-source.github.io/somethingyou-explainer/</a></p>
+  <p><span class="link-label">3. Oktria AI Explainer</span> <a href="https://gartonjames-source.github.io/oktria-ai-explainer/">gartonjames-source.github.io/oktria-ai-explainer/</a></p>
+  <p><span class="link-label">4. Palantir + SY + Oktria Stack</span> <a href="https://gartonjames-source.github.io/oktria-ai-explainer/Palantir_SY_Oktria.html">gartonjames-source.github.io/.../Palantir_SY_Oktria.html</a></p>
+  <p><span class="link-label">5. From Venue to Ecosystem</span> <a href="#">Staged visual walkthrough — how SY completes the architecture</a></p>
+</div>
+
+<p><strong>Founding Brief</strong> — the "why." The founding thesis and the gap that needs filling.</p>
+<p><strong>SY Explainer</strong> — "what SY is." Orchestration and intelligence platform. Not a product company — a platform company. Oktria is one ecosystem on SY, same as Eon (loyalty) and DMG-Ops (payments).</p>
+<p><strong>AI Explainer</strong> — "how the intelligence layer works." What Ricardo was trying to build but couldn't alone. The knowledge substrate, model training, local execution. You may recall the three deliverables at the end: Quantum Ledger, Quantum Pricing, and a Proprietary AI Model delivered locally inside Oktria.</p>
+<p><strong>Palantir + SY + Oktria Stack</strong> — "who fits where." The three-sided fit: Oktria (product + market), Palantir + SY (infrastructure + intelligence), DMG/Urpay/HioPOS (payment orchestration).</p>
+<p><strong>From Venue to Ecosystem</strong> — the visual walkthrough. Starts from what every venue has today (POS, payments, ERP that don't talk), builds stage by stage through payment orchestration, SY bridging, workflow automation, ADK/Oloid deployment, and lands on the full Oktria + SY architecture. Nine stages, each one grounded in systems you already know.</p>
+
+<hr class="section-divider">
+
+<h2>3. Key Questions — Direct Answers</h2>
+
+<h3>1. Structure of SY (team, capability, current state)</h3>
+
+<p><strong>Ownership:</strong> My company. Sole founder and director. This is expected to evolve — there are some DMG-related items being worked through that will inform the longer-term shareholding structure.</p>
+
+<p><strong>Team:</strong> Three people — me, an engineer, and a data scientist — plus an agent-driven build architecture that lets the core team operate at multiples of its headcount.</p>
+
+<p><strong>Capability:</strong> Platform engineering, agent architecture, financial-systems design, ecosystem modelling, commercial architecture.</p>
+
+<p><strong>Current state:</strong></p>
+
+<table>
+  <tr><th>Capability</th><th>Now</th><th>October</th></tr>
+  <tr><td>Ingress and egress</td><td><strong>Live</strong></td><td>Live</td></tr>
+  <tr><td>Multi-sided personalised portal</td><td><strong>Live</strong></td><td>Live</td></tr>
+  <tr><td>Quantum ledger</td><td><strong>Live</strong></td><td>Live</td></tr>
+  <tr><td>Transaction AI model (payment world)</td><td>60%</td><td><strong>80%</strong></td></tr>
+  <tr><td>Oktria-specific training model</td><td>—</td><td><strong>Completed to product roadmap</strong></td></tr>
+  <tr><td>Ecosystem self-configuration</td><td>Beta</td><td><strong>Completed to product roadmap</strong></td></tr>
+  <tr><td>Ecosystem new-deal management</td><td>Beta</td><td><strong>Completed to product roadmap</strong></td></tr>
+</table>
+
+<h3>2. Role across the three layers</h3>
+
+<table>
+  <tr><th>Layer</th><th>What SY Provides</th></tr>
+  <tr>
+    <td><strong>Intelligence</strong></td>
+    <td>Knowledge substrate that grounds decisions in verified truth. Reconciles conflicting inputs before they reach decision-makers. Extends proven models into new territory. Audits provenance.</td>
+  </tr>
+  <tr>
+    <td><strong>Orchestration</strong></td>
+    <td>Mobius maps the ecosystem, renders participation, runs settlement, reconciliation, fee distribution, and dynamic pricing. Carries the shift from price-taker to price-maker that unsticks commercial conversations.</td>
+  </tr>
+  <tr>
+    <td><strong>Delivery</strong></td>
+    <td>Two modes. <strong>Oloid:</strong> A2A agent deployed locally into a participant's workspace — participates in their tools, doesn't replace them. <strong>Mobieye:</strong> hosted engagement surface for participants without integration. Every participant gets their own model. Meet them where they are.</td>
+  </tr>
+</table>
+
+<p>OKTRIA sits on top of all three. Payments is one touchpoint in OKTRIA's ecosystem, not the subject of it.</p>
+
+<h3>3. OKTRIA ↔ SY — commercially and operationally</h3>
+
+<div class="callout">
+  <strong>SY is the service provider. OKTRIA is the client.</strong>
+</div>
+
+<p><strong>Operationally:</strong> SY provides platform, intelligence, delivery surfaces, and pricing engine. OKTRIA provides the ecosystem, participants, commercial model, market, and mandate.</p>
+
+<p><strong>Commercially:</strong> SY is a COGS line item for OKTRIA — the same way a payment processor sits inside the cost of revenue, not as a separate SaaS invoice. OKTRIA pays SY a percentage of the revenue generated when utilising the capability — in the range of 5–10%, depending on utilisation. Clean, scalable, and aligned: SY only earns when OKTRIA earns.</p>
+
+<p>The commercial principle is set: SY stays upstream as infrastructure cost, OKTRIA stays downstream as the product and customer relationship.</p>
+
+<h3>4. What sits inside SY vs inside OKTRIA</h3>
+
+<table>
+  <tr><th style="width:25%">Function</th><th style="width:37.5%">Inside OKTRIA (the product)</th><th style="width:37.5%">SY provides to OKTRIA (the engine)</th></tr>
+  <tr>
+    <td><strong>Ecosystem</strong></td>
+    <td>OKTRIA dictates who participates, which deals get done, and the commercial terms of every relationship. All ecosystem decisions are OKTRIA's.</td>
+    <td>Maps and renders the ecosystem pattern. Manages participants, state, and commercial terms across owned and non-owned systems — so OKTRIA's decisions execute cleanly.</td>
+  </tr>
+  <tr>
+    <td><strong>Product intelligence</strong></td>
+    <td>All product intelligence sits inside OKTRIA — health rings, KPI framework, leading-to-lagging model, domain knowledge, what to measure and why. This is OKTRIA's IP.</td>
+    <td>SY provides OKTRIA with its own model. Handles the data pipeline, model training, and local execution at each venue — so the intelligence OKTRIA designed actually runs.</td>
+  </tr>
+  <tr>
+    <td><strong>Data ingress</strong></td>
+    <td>The data sources — venue systems producing the data. HioPOS is owned; others (Tanda, Xero, SevenRooms, Maitre D, etc.) are third-party. OKTRIA decides what gets connected.</td>
+    <td>BridgeAI adapter factory — normalises data from POS, payments, ERP, loyalty, reviews into a single intelligence surface that OKTRIA's model consumes.</td>
+  </tr>
+  <tr>
+    <td><strong>Onboarding + delivery</strong></td>
+    <td>The onboarding experience — what the operator and their staff see. Mission setup, self-configuration UX. Ricardo's five years of product design. OKTRIA owns the user experience.</td>
+    <td>Configuration engine that renders intelligence, pricing, and personalised views from ecosystem state. Makes onboarding the delivery mechanism, not just a setup step.</td>
+  </tr>
+  <tr>
+    <td><strong>Commercial architecture</strong></td>
+    <td>OKTRIA controls pricing and rules — what the operator pays, how value is communicated, the commercial proposition to venue groups. All commercial decisions are OKTRIA's.</td>
+    <td>SY executes the pricing and makes it happen in a way all systems understand — dynamic fee logic, RACI resolution, COGS model, payment-as-billing-rail. Economics rendered from ecosystem state, not a price list.</td>
+  </tr>
+  <tr>
+    <td><strong>Ledger + reconciliation</strong></td>
+    <td>The financial relationships — who owes whom, operator economics, group-level consolidation. OKTRIA defines the commercial terms.</td>
+    <td>Quantum Ledger — settlement, reconciliation, fee distribution. Makes OKTRIA's commercial terms executable and auditable.</td>
+  </tr>
+  <tr>
+    <td><strong>Deployment</strong></td>
+    <td>Distribution — Carl/HioPOS network, Blue Coral venues, Seagrass pipeline. The route to market. OKTRIA decides where it goes.</td>
+    <td>Two delivery modes: <strong>Oloid</strong> — a local ADK agent delivered inside the ecosystem participant's own systems, or <strong>Mobieye</strong> — a hosted website delivered standalone. Either way, meet them where they are — with or without integration.</td>
+  </tr>
+  <tr>
+    <td><strong>People + identity</strong></td>
+    <td>The people — operators, GMs, chefs, CFOs. The designations and roles. OKTRIA defines who sees what and who's accountable for what.</td>
+    <td>Per-participant model substrate. RACI engine resolves each person's view, accountability, and economics from OKTRIA's configuration. Each person has their own model.</td>
+  </tr>
+  <tr>
+    <td><strong>Brand + entity</strong></td>
+    <td>Product brand (OKTRIA). Customer-facing. The thing the operator buys. All market presence is OKTRIA's.</td>
+    <td>Platform brand (Somethingyou). Infrastructure. COGS line item — 5–10% of revenue. Invisible to the operator.</td>
+  </tr>
+</table>
+
+<p>Neither makes sense without the other for this opportunity, which is exactly why the structure conversation matters now.</p>
+
+<hr class="section-divider">
+
+<h2>4. What Ricardo Confirmed</h2>
+
+<p>The Ricardo and Solman session validated the product thesis and, equally importantly, identified exactly where the previous attempt hit structural limits. These are the anchor points everything else builds from:</p>
+
+<table>
+  <tr><th>What Ricardo Built (confirmed, in code)</th><th>Where It Hit the Wall</th><th>What SY Addresses</th></tr>
+  <tr>
+    <td>Three health rings — Care, Calculates, Creates — as an overall operating health score</td>
+    <td>Rings measured performance but didn't connect to a financial outcome the operator could act on</td>
+    <td>Every formula terminates at a budget line: makes money, saves money, improves cashflow, or brings customers</td>
+  </tr>
+  <tr>
+    <td>Weighted KPI framework with leading-to-lagging indicator model</td>
+    <td>BigQuery cost per query exceeded per-restaurant license — unit economics inverted at scale</td>
+    <td>Local model execution. Intelligence runs at the venue. No per-query cloud cost for the deterministic workload</td>
+  </tr>
+  <tr>
+    <td>Self-configuration via missions — operator describes business, system configures KPIs</td>
+    <td>Self-configuration lived in the product layer only — no connection to commercial terms, pricing, or ecosystem state</td>
+    <td>Onboarding configuration renders intelligence, pricing, and personalised views in one flow. The delivery mechanism, not just setup</td>
+  </tr>
+  <tr>
+    <td>KPI cascading from head office → stores → individuals. Each person sees their own metrics linked to their designation</td>
+    <td>Built as a feature, not as architectural foundation — couldn't resolve the same data differently based on who's looking and what they're accountable for</td>
+    <td>RACI flip as structural foundation. Onboarding determines what you see, what you're accountable for, and how economics resolve from your perspective. Each person has their own model</td>
+  </tr>
+  <tr>
+    <td>Data ingress from Maitre D, Google reviews, financials</td>
+    <td>Data flowing in but nowhere intelligent to land — reporting in isolation, no ecosystem management</td>
+    <td>Ingress paired with intelligence. BridgeAI normalises data; the model knows what to do with it. Ecosystem orchestrated, not owned</td>
+  </tr>
+  <tr>
+    <td>Deployed with Seagrass via Maitre D. Final negotiations with Spur Group (SA) and Nando's</td>
+    <td>Designer built it alone — no engineering layer underneath for scale, compliance, or multi-party commercial orchestration</td>
+    <td>SY provides the engineering layer: platform, intelligence pipeline, delivery surfaces, and commercial architecture underneath the product</td>
+  </tr>
+</table>
+
+<div class="callout">
+  <strong>The product thesis was right. The gap was infrastructure and orchestration.</strong> That's what SY exists to fill — not to replace Ricardo's work, but to provide the engine it runs on.
+</div>
+
+<hr class="section-divider">
+
+<h2>5. Fit with the Seven Points</h2>
+
+<p>Seven key architectural points each map to a specific SY capability — and each one connects back to something Ricardo confirmed:</p>
+
+<table>
+  <tr><th style="width:30px">#</th><th>Point</th><th>SY Capability</th><th>Ricardo Anchor</th></tr>
+  <tr><td>1</td><td>Pipe + intelligence, not pipe alone</td><td>BridgeAI ingress paired with the model layer</td><td>Data from Maitre D flowed in but had nowhere intelligent to land</td></tr>
+  <tr><td>2</td><td>Orchestrate, don't own</td><td>Manages participants across owned and non-owned systems</td><td>Integration bottleneck when trying to own every system</td></tr>
+  <tr><td>3</td><td>Local model execution</td><td>Per-venue models, not cloud-billed queries</td><td>BigQuery cost exceeded per-restaurant license fee</td></tr>
+  <tr><td>4</td><td>Oktria gets its own model</td><td>SY builds, trains, maintains; Oktria owns the relationship</td><td>Ricardo built product logic; needed an engine underneath</td></tr>
+  <tr><td>5</td><td>Onboarding = delivery mechanism</td><td>Configuration renders intelligence, pricing, and views in one flow</td><td>Mission-based self-config existed but only in the product layer</td></tr>
+  <tr><td>6</td><td>Every formula terminates financially</td><td>Pricing engine maps every KPI to a budget line</td><td>Health rings measured performance but didn't connect to a financial outcome</td></tr>
+  <tr><td>7</td><td>SY is the common thread</td><td>Connects product layer to infrastructure layer to payment layer</td><td>Designer built it alone — no multi-party orchestration layer</td></tr>
+</table>
+
+<hr class="section-divider">
+
+<p style="text-align: center; color: #666; font-size: 10pt; margin-top: 24pt;">&copy; 2026 Somethingyou. Confidential.</p>
+
+</body>
+</html>
